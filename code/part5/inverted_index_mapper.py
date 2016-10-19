@@ -4,16 +4,19 @@ import re
 import sys
 import csv
 
+DELIMITER = '\t'
+
+
 # parse a forum post body for words (i.e. alphanumeric chars)
 def parseBody(body):
     words = re.findall(r"([a-zA-Z]+)", body)
     return words
 
 def emit(key, value):
-    print key + '\t' + value
+    print key + DELIMITER + value
 
 # mapper 
-#(forumFileChunk, "<p>asdasdd....") -> [("dog", 1), ("rock", 2),...]
+# Map(forumFileChunk, "<p>asdasdd....") -> [("dog", 1), ("rock", 2),...]
 def mapper():
     reader = csv.reader(sys.stdin, delimiter='\t')
     for post in reader:
